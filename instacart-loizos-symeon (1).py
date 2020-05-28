@@ -23,12 +23,6 @@ aisles = pd.read_csv('aisles.csv')
 departments = pd.read_csv('departments.csv')
 
 
-# In[3]:
-
-
-orders = orders.loc[orders.user_id.isin(orders.user_id.drop_duplicates().sample(frac=0.1, random_state=25))] 
-
-
 # In[4]:
 
 
@@ -58,12 +52,6 @@ last_five = op5.groupby(['user_id','product_id'])[['order_id']].count()
 last_five.columns = ['times_last5']
 last_five = last_five.reset_index()
 last_five.head(10)
-
-
-# In[7]:
-
-
-last_five.tail()
 
 
 # In[8]:
@@ -774,56 +762,6 @@ import warnings
 
 if not sys.warnoptions:
     warnings.simplefilter("ignore")
-
-###########################
-## IMPORT REQUIRED PACKAGES
-###########################
-import xgboost as xgb
-from sklearn.model_selection import GridSearchCV
-
-####################################
-## SET BOOSTER'S RANGE OF PARAMETERS
-# IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
-# Be cautious what parameters you enter in paramiGrid section.
-# More paremeters means that GridSearch will create and evaluate more models.
-####################################    
-paramGrid = {"max_depth":[5,10],
-            "colsample_bytree":[0.3,0.4]}  
-
-########################################
-## INSTANTIATE XGBClassifier()
-########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10)
-
-##############################################
-## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
-#############################################
-gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
-
-################################################################
-## TRAIN THE MODELS
-### - with the combinations of different parameters
-### - here is where GridSearch will be exeucuted
-#################################################################
-model = gridsearch.fit(X_train, y_train)
-
-##################################
-## OUTPUT(S)
-##################################
-# Print the best parameters
-print("The best parameters are: /n",  gridsearch.best_params_)
-
-# Store the model for prediction (chapter 5)
-model = gridsearch.best_estimator_
-
-# Delete X_train , y_train
-del [X_train, y_train]
-
-
-# In[98]:
-
-
-model.get_params()
 
 
 # In[99]:
