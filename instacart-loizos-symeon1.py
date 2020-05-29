@@ -743,21 +743,6 @@ xgb.plot_importance(model)
 model.get_xgb_params()
 
 
-# In[97]:
-
-
-###########################
-## DISABLE WARNINGS
-###########################
-import sys
-import warnings
-
-if not sys.warnoptions:
-    warnings.simplefilter("ignore")
-
-
-# In[99]:
-
 
 # Predict values for test data with our model from chapter 5 - the results are saved as a Python array
 test_pred = model.predict(data_test).astype(int)
