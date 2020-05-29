@@ -698,14 +698,6 @@ data_test = data_test.drop(['eval_set','order_id'], axis=1)
 #Check if the data_test DF, has the same number of columns as the data_train DF, excluding the response variable
 data_test.head()
 
-
-# In[94]:
-
-
-import sys
-get_ipython().system('{sys.executable} -m pip install xgboost')
-
-
 # In[95]:
 
 
