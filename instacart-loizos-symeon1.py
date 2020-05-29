@@ -737,12 +737,6 @@ model = xgbc.fit(X_train, y_train)
 xgb.plot_importance(model)
 
 
-# In[96]:
-
-
-model.get_xgb_params()
-
-
 
 # Predict values for test data with our model from chapter 5 - the results are saved as a Python array
 test_pred = model.predict(data_test).astype(int)
