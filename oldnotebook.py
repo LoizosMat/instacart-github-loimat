@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 # For data manipulation
 import pandas as pd              
@@ -12,19 +10,15 @@ import gc
 gc.enable()                       # Activate 
 
 
-# In[2]:
 
 
-orders = pd.read_csv('../input/instacart-market-basket-analysis/orders.csv')
-order_products_train = pd.read_csv('../input/instacart-market-basket-analysis/order_products__train.csv')
-order_products_prior = pd.read_csv('../input/instacart-market-basket-analysis/order_products__prior.csv')
-products = pd.read_csv('../input/instacart-market-basket-analysis/products.csv')
-aisles = pd.read_csv('../input/instacart-market-basket-analysis/aisles.csv')
-departments = pd.read_csv('../input/instacart-market-basket-analysis/departments.csv')
+orders = pd.read_csv('orders.csv')
+order_products_train = pd.read_csv('order_products__train.csv')
+order_products_prior = pd.read_csv('order_products__prior.csv')
+products = pd.read_csv('products.csv')
+aisles = pd.read_csv('aisles.csv')
+departments = pd.read_csv('departments.csv')
 
-
-
-# In[4]:
 
 
 # We convert character variables into category. 
@@ -34,8 +28,6 @@ departments['department'] = departments['department'].astype('category')
 orders['eval_set'] = orders['eval_set'].astype('category')
 products['product_name'] = products['product_name'].astype('category')
 
-
-# In[5]:
 
 
 #Merge the orders DF with order_products_prior by their order_id, keep only these rows with order_id that they are appear on both DFs
