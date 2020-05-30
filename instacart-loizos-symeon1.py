@@ -724,7 +724,7 @@ parameters = {'eval_metric':'logloss',
 ########################################
 ## INSTANTIATE XGBClassifier()
 ########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num_boost_round=10)
+xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num_boost_round=10, gpu_id=0, tree_method = 'gpu_hist')
 
 ########################################
 ## TRAIN MODEL
@@ -736,6 +736,7 @@ model = xgbc.fit(X_train, y_train)
 ##################################
 xgb.plot_importance(model)
 
+model.get_xgb_params()
 
 
 # Predict values for test data with our model from chapter 5 - the results are saved as a Python array
