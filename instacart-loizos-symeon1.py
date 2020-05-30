@@ -734,7 +734,6 @@ model = xgbc.fit(X_train, y_train)
 ##################################
 # FEATURE IMPORTANCE - GRAPHICAL
 ##################################
-xgb.plot_importance(model)
 
 model.get_xgb_params()
 
