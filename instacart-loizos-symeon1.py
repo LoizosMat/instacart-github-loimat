@@ -22,7 +22,7 @@ products = pd.read_csv('products.csv')
 aisles = pd.read_csv('aisles.csv')
 departments = pd.read_csv('departments.csv')
 
-
+orders = orders.loc[orders.user_id.isin(orders.user_id.drop_duplicates().sample(frac=0.1, random_state=25))] 
 # In[4]:
 
 
@@ -717,7 +717,7 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 ########################################
 parameters = {'eval_metric':'logloss', 
               'max_depth':'5', 
-              'colsample_bytree':'0.6',
+              'colsample_bytree':'0.4',
               'subsample':'0.8',
              }
 
@@ -847,5 +847,5 @@ print(sub.shape[0]==75000)
 # In[109]:
 
 
-sub.to_csv('sub.csv', index=False)
+sub.to_csv('sub.csv', index=True)
 
