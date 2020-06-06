@@ -846,5 +846,5 @@ print(sub.shape[0]==75000)
 # In[109]:
 
 
-sub.to_csv('sub.csv', index=True)
+sub.to_csv('sub.csv', index=False)
 
