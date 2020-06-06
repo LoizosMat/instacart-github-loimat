@@ -778,7 +778,6 @@ from sklearn.model_selection import GridSearchCV
 paramGrid = {"max_depth":[5,6],
             "colsample_bytree":[0.6,0.7]}  
 
-########################################
 ## INSTANTIATE XGBClassifier()
 ########################################
 xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
