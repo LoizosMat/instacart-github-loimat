@@ -866,7 +866,7 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 ########################################
 parameters = {'eval_metric':'logloss', 
               'max_depth':'5', 
-              'colsample_bytree':'0.8',
+              'colsample_bytree':'0.9',
               'subsample':'0.8',
               'min_child_weight':'2'
              }
