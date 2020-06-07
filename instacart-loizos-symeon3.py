@@ -912,8 +912,8 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'max_depth':[5,5.5,6],
-             'min_child_weight':[1.5,2,2.5]}  
+paramGrid = {'max_depth':[5,6],
+             'min_child_weight':[1,2,3]}  
 
 ########################################
 ## INSTANTIATE XGBClassifier()
