@@ -866,8 +866,8 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 ########################################
 parameters = {'eval_metric':'logloss', 
               'max_depth':'5', 
-              'colsample_bytree':'0.9',
-              'subsample':'0.8',
+              'colsample_bytree':'1',
+              'subsample':'0.9',
               'min_child_weight':'2'
              }
 
@@ -912,8 +912,8 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'subsample':[0.9,1],
-            'colsample_bytree':[0.8,0.9]}  
+paramGrid = {'max_depth':[5,5.5,6],
+             'min_child_weight':[1.5,2,2.5]}  
 
 ########################################
 ## INSTANTIATE XGBClassifier()
