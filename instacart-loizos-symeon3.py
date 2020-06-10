@@ -887,6 +887,68 @@ model = xgbc.fit(X_train, y_train)
 
 model.get_xgb_params()
 
+# In[116]:
+
+
+###########################
+## DISABLE WARNINGS
+###########################
+import sys
+import warnings
+
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
+
+###########################
+## IMPORT REQUIRED PACKAGES
+###########################
+import xgboost as xgb
+from sklearn.model_selection import GridSearchCV
+
+####################################
+## SET BOOSTER'S RANGE OF PARAMETERS
+# IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
+# Be cautious what parameters you enter in paramiGrid section.
+# More paremeters means that GridSearch will create and evaluate more models.
+####################################    
+paramGrid = {'subsample':[i/10.0 for i in range(6,10)],
+             'colsample_bytree':[i/10.0 for i in range(6,10)]
+            }  
+
+########################################
+## INSTANTIATE XGBClassifier()
+########################################
+xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
+
+##############################################
+## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
+#############################################
+gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
+
+################################################################
+## TRAIN THE MODELS
+### - with the combinations of different parameters
+### - here is where GridSearch will be exeucuted
+#################################################################
+model = gridsearch.fit(X_train, y_train)
+
+##################################
+## OUTPUT(S)
+##################################
+# Print the best parameters
+print("The best parameters are: /n",  gridsearch.best_params_)
+
+# Store the model for prediction (chapter 5)
+model = gridsearch.best_estimator_
+
+# Delete X_train , y_train
+del [X_train, y_train]
+
+
+# In[117]:
+
+
+model.get_params()
 
 
 
