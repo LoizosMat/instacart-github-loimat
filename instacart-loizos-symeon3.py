@@ -868,7 +868,8 @@ parameters = {'eval_metric':'logloss',
               'max_depth':'9', 
               'colsample_bytree':'1',
               'subsample':'0.9',
-              'min_child_weight':'2'
+              'min_child_weight':'3'
+              'gamma':'0'
              }
 
 ########################################
@@ -912,8 +913,7 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'max_depth':[9,10],
-             'min_child_weight':[2,3]}  
+paramGrid = {'gamma':[i/10.0 for i in range(0,5)]}  
 
 ########################################
 ## INSTANTIATE XGBClassifier()
