@@ -912,7 +912,7 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'max_depth':[7,8],
+paramGrid = {'max_depth':[8,9],
              'min_child_weight':[1,2]}  
 
 ########################################
