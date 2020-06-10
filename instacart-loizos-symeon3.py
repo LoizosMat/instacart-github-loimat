@@ -869,7 +869,6 @@ parameters = {'eval_metric':'logloss',
               'colsample_bytree':'1',
               'subsample':'0.9',
               'min_child_weight':'3'
-              'gamma':'1'
              }
 
 ########################################
