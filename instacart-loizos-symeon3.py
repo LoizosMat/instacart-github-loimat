@@ -865,10 +865,10 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 ## SET BOOSTER'S PARAMETERS
 ########################################
 parameters = {'eval_metric':'logloss', 
-              'max_depth':'7', 
+              'max_depth':'9', 
               'colsample_bytree':'1',
               'subsample':'0.9',
-              'min_child_weight':'1'
+              'min_child_weight':'2'
              }
 
 ########################################
@@ -912,8 +912,8 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'max_depth':[8,9],
-             'min_child_weight':[1,2]}  
+paramGrid = {'max_depth':[9,10],
+             'min_child_weight':[2,3]}  
 
 ########################################
 ## INSTANTIATE XGBClassifier()
