@@ -1127,9 +1127,8 @@ xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num
 
 ########################################
 ## TRAIN MODEL
-########################################
+#########################################
 model = xgbc.fit(X_train, y_train)
-
 
 
 
