@@ -41,41 +41,6 @@ orders['eval_set'] = orders['eval_set'].astype('category')
 products['product_name'] = products['product_name'].astype('category')
 
 
-# In[5]:
-
-
-orders.sort_values('order_hour_of_day', inplace=True)
-orders.drop_duplicates(inplace=True)
-orders.reset_index(drop=True, inplace=True)
-
-
-# In[6]:
-
-
-def timezone(s):
-    if s < 6:
-        return '0'
-    elif s < 12:
-        return '1'
-    elif s < 18:
-        return '2'
-    else:
-        return '3'
-
-
-# In[7]:
-
-
-orders['timezone'] = orders.order_hour_of_day.map(timezone)
-orders.head()
-
-
-# In[8]:
-
-
-orders['timezone'] = orders['timezone'].astype('category')
-
-
 # In[9]:
 
 
@@ -619,24 +584,6 @@ gc.collect()
 user.head() 
 
 
-# In[82]:
-
-
-utz = op.groupby(['user_id','timezone'])['order_hour_of_day'].count().to_frame('user_timezone')
-utz = utz.reset_index()
-utz.head()
-
-
-
-user = user.merge(utz, on='user_id', how='left')
-utz.head()
-
-
-# In[84]:
-
-
-del [utz]
-
 
 # In[85]:
 
@@ -952,10 +899,7 @@ import xgboost as xgb
 ##########################################
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
-from sklearn import preprocessing
 
-lbl = preprocessing.LabelEncoder()
-X_train['timezone'] = lbl.fit_transform(X_train['timezone'].astype(str))
 ########################################
 ########################################
 ## SET BOOSTER'S PARAMETERS
