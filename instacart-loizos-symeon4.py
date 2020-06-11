@@ -851,27 +851,13 @@ o_dow = o_dow.reset_index()
 o_dow.head()
 
 
-# In[199]:
-
-
-o_hod = op.groupby(['user_id','order_hour_of_day'])['order_id'].count().to_frame('user_orders_for_each_hour')
-o_hod = o_hod.reset_index()
-o_hod.head(25)
-
-
-# In[200]:
-
-
-o_dow = pd.merge(o_dow, o_hod, on='user_id', how='outer')
-o_dow.head(50)
-
 
 # In[204]:
 
 
 uxp = uxp.merge(o_dow, on='user_id', how='left')
 
-del [o_dow, o_hod]
+del [o_dow]
 uxp.head()
 
 
