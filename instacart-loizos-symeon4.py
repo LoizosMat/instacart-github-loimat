@@ -7,7 +7,6 @@
 # For data manipulation
 import pandas as pd            
 import time
-import matplotlib.pyplot as plt
 
 # Garbage Collector to free up memory
 import gc                         
@@ -993,9 +992,6 @@ xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num
 #########################################
 model = xgbc.fit(X_train, y_train)
 
-# FEATURE IMPORTANCE - GRAPHICAL
-##################################
-xgb.plt_importance(model)
 
 model.get_xgb_params()
 
