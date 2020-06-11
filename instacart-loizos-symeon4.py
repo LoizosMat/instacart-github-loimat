@@ -24,10 +24,6 @@ aisles = pd.read_csv('aisles.csv')
 departments = pd.read_csv('departments.csv')
 
 
-# In[3]:
-
-
-orders = orders.loc[orders.user_id.isin(orders.user_id.drop_duplicates().sample(frac=0.05, random_state=25))] 
 
 
 # In[4]:
