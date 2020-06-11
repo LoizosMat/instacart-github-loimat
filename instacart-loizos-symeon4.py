@@ -147,20 +147,6 @@ ais_dow = ais_dow.reset_index()
 ais_dow.head()
 
 
-# In[76]:
-
-
-ais_hod = opad.groupby(['aisle_id', 'order_hour_of_day'])['order_id'].count().to_frame('aisle_orders_for_each_hour')
-ais_hod = ais_hod.reset_index()
-ais_hod.head()
-
-
-# In[77]:
-
-
-ais_dow = ais_dow.merge(ais_hod, on='aisle_id', how='left')
-ais_dow.head()
-
 
 # In[78]:
 
@@ -227,21 +213,6 @@ departments.head()
 
 dep_dow = opad.groupby(['department_id', 'order_dow'])['order_id'].count().to_frame('department_orders_for_each_day')
 dep_dow = dep_dow.reset_index()
-dep_dow.head()
-
-
-# In[87]:
-
-
-dep_hod = opad.groupby(['department_id', 'order_hour_of_day'])['order_id'].count().to_frame('department_orders_for_each_hour')
-dep_hod = dep_hod.reset_index()
-dep_hod.head()
-
-
-# In[88]:
-
-
-dep_dow = dep_dow.merge(dep_hod, on='department_id', how='left')
 dep_dow.head()
 
 
@@ -682,37 +653,6 @@ utz = utz.reset_index()
 utz.head()
 
 
-# In[220]:
-
-
-otz = op.groupby(['order_id','timezone'])['order_hour_of_day'].count().to_frame('order_timezone')
-otz = otz.reset_index()
-otz.head()
-
-
-# In[221]:
-
-
-ptz = op.groupby(['product_id','timezone'])['order_hour_of_day'].count().to_frame('product_timezone')
-ptz = ptz.reset_index()
-ptz.head()
-
-
-# In[222]:
-
-
-utz = utz.merge(otz, on='timezone', how='left')
-utz.head()
-
-
-# In[ ]:
-
-
-utz = utz.merge(ptz, on='timezone', how='left')
-utz.head()
-
-
-# In[ ]:
 
 
 user = user.merge(utz, on='user_id', how='left')
@@ -722,7 +662,7 @@ utz.head()
 # In[ ]:
 
 
-del [utz,otz,ptz]
+del [utz]
 
 
 # In[173]:
@@ -926,29 +866,6 @@ o_dow = pd.merge(o_dow, o_hod, on='user_id', how='outer')
 o_dow.head(50)
 
 
-# In[201]:
-
-
-p_dow = op.groupby(['product_id','order_dow'])['order_id'].count().to_frame('products_orders_for_each_day')
-p_dow = p_dow.reset_index()
-p_dow.head()
-
-
-# In[202]:
-
-
-p_hod = op.groupby(['product_id','order_hour_of_day'])['order_id'].count().to_frame('product_orders_for_each_hour')
-p_hod = p_hod.reset_index()
-p_hod.head(25)
-
-
-# In[203]:
-
-
-p_dow = pd.merge(p_dow, p_hod, on='product_id', how='outer')
-p_dow.head(50)
-
-
 # In[204]:
 
 
@@ -960,14 +877,6 @@ uxp.head()
 
 # In[205]:
 
-
-uxp = uxp.merge(p_dow, on='product_id', how='left')
-
-del [p_dow, p_hod]
-uxp.head()
-
-
-# In[206]:
 
 
 uxp = uxp.merge(last_five, on=['user_id', 'product_id'], how='left')
