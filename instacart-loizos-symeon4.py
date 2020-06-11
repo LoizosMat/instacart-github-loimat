@@ -634,14 +634,6 @@ ptz.head()
 utz = utz.merge(ptz, on='timezone', how='left')
 utz.head()
 
-otz = op.groupby(['order_id','timezone'])['order_hour_of_day'].count().to_frame('order_timezone')
-otz = otz.reset_index()
-otz.head()
-
-utz = utz.merge(otz, on='timezone', how='left')
-utz.head()
-# In[83]:
-
 
 user = user.merge(utz, on='user_id', how='left')
 utz.head()
