@@ -592,10 +592,6 @@ num_distinct_prodct = num_distinct_prodct.reset_index()
 num_distinct_prodct.head()
 
 
-# In[169]:
-
-
-del [num_distinct_prodct]
 
 
 # In[166]:
@@ -604,6 +600,10 @@ del [num_distinct_prodct]
 aatco = aatco.merge(num_distinct_prodct, on='user_id', how='left')
 aatco.head()
 
+# In[169]:
+
+
+del [num_distinct_prodct]
 
 # In[167]:
 
