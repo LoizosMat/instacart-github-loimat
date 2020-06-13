@@ -23,11 +23,6 @@ aisles = pd.read_csv('aisles.csv')
 departments = pd.read_csv('departments.csv')
 
 
-# In[133]:
-
-
-orders = orders.loc[orders.user_id.isin(orders.user_id.drop_duplicates().sample(frac=0.05, random_state=25))] 
-
 
 # In[134]:
 
@@ -1141,11 +1136,6 @@ data_test = data_test.drop(['eval_set','order_id','aisle_id','department_id'], a
 data_test.head()
 
 
-# In[284]:
-
-
-import sys
-get_ipython().system('{sys.executable} -m pip install xgboost')
 
 
 # In[285]:
@@ -1168,100 +1158,25 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 ########################################
 parameters = {'eval_metric':'logloss', 
               'max_depth':'8', 
-              'colsample_bytree':'0.8',
-              'subsample':'0.8',
+              'colsample_bytree':'0.9',
+              'subsample':'0.9',
               'min_child_weight':'1'
              }
 
 ########################################
 ## INSTANTIATE XGBClassifier()
 ########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num_boost_round=10)
+xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
 
 ########################################
 ## TRAIN MODEL
 ########################################
 model = xgbc.fit(X_train, y_train)
 
-##################################
-# FEATURE IMPORTANCE - GRAPHICAL
-##################################
-xgb.plot_importance(model)
-
-
-# In[286]:
 
 
 model.get_xgb_params()
 
-
-# In[ ]:
-
-
-
-
-
-# In[287]:
-
-
-###########################
-## DISABLE WARNINGS
-###########################
-import sys
-import warnings
-
-if not sys.warnoptions:
-    warnings.simplefilter("ignore")
-
-###########################
-## IMPORT REQUIRED PACKAGES
-###########################
-import xgboost as xgb
-from sklearn.model_selection import GridSearchCV
-
-####################################
-## SET BOOSTER'S RANGE OF PARAMETERS
-# IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
-# Be cautious what parameters you enter in paramiGrid section.
-# More paremeters means that GridSearch will create and evaluate more models.
-####################################    
-paramGrid = {'subsample':[0.7,0.8],
-            'min_child_weight':[1,2]}  
-
-########################################
-## INSTANTIATE XGBClassifier()
-########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10)
-
-##############################################
-## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
-#############################################
-gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
-
-################################################################
-## TRAIN THE MODELS
-### - with the combinations of different parameters
-### - here is where GridSearch will be exeucuted
-#################################################################
-model = gridsearch.fit(X_train, y_train)
-
-##################################
-## OUTPUT(S)
-##################################
-# Print the best parameters
-print("The best parameters are: /n",  gridsearch.best_params_)
-
-# Store the model for prediction (chapter 5)
-model = gridsearch.best_estimator_
-
-# Delete X_train , y_train
-del [X_train, y_train]
-
-
-# In[ ]:
-
-
-model.get_params()
 
 
 # In[ ]:
