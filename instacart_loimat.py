@@ -1151,6 +1151,13 @@ if not sys.warnoptions:
 import xgboost as xgb
 from sklearn.model_selection import GridSearchCV
 
+
+##########################################
+## SPLIT DF TO: X_train, y_train (axis=1)
+##########################################
+X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
+
+
 ####################################
 ## SET BOOSTER'S RANGE OF PARAMETERS
 # IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
