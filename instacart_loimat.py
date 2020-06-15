@@ -1158,16 +1158,14 @@ from sklearn.model_selection import GridSearchCV
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
 
-####################################
-## SET BOOSTER'S RANGE OF PARAMETERS
-# IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
-# Be cautious what parameters you enter in paramiGrid section.
-# More paremeters means that GridSearch will create and evaluate more models.
-####################################    
-paramGrid = {'n_estimators':[range(50, 400, 50)]
-            }  
 
-########################################
+n_estimators = [100, 150, 200, 250]
+max_depth = [4, 6, 8, 10]
+print(max_depth)
+paramGrid = dict(max_depth=max_depth, n_estimators=n_estimators)
+kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+
+##############
 ## INSTANTIATE XGBClassifier()
 ########################################
 xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
@@ -1175,7 +1173,7 @@ xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num
 ##############################################
 ## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
 #############################################
-gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
+gridsearch = GridSearchCV(xgbc, paramGrid, cv=kfold, verbose=2, n_jobs=1)
 
 ################################################################
 ## TRAIN THE MODELS
