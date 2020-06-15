@@ -1136,46 +1136,65 @@ data_test = data_test.drop(['eval_set','order_id','aisle_id','department_id'], a
 data_test.head()
 
 
+###########################
+## DISABLE WARNINGS
+###########################
+import sys
+import warnings
 
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
 
-# In[285]:
-
-
-# TRAIN FULL 
 ###########################
 ## IMPORT REQUIRED PACKAGES
 ###########################
 import xgboost as xgb
+from sklearn.model_selection import GridSearchCV
 
-
-##########################################
-## SPLIT DF TO: X_train, y_train (axis=1)
-##########################################
-X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
-
-########################################
-## SET BOOSTER'S PARAMETERS
-########################################
-parameters = {'eval_metric':'logloss', 
-              'max_depth':'8', 
-              'colsample_bytree':'0.9',
-              'subsample':'0.9',
-              'min_child_weight':'1'
-             }
+####################################
+## SET BOOSTER'S RANGE OF PARAMETERS
+# IMPORTANT NOTICE: Fine-tuning an XGBoost model may be a computational prohibitive process with a regular computer or a Kaggle kernel. 
+# Be cautious what parameters you enter in paramiGrid section.
+# More paremeters means that GridSearch will create and evaluate more models.
+####################################    
+paramGrid = {'n_estimators'= range(50, 400, 50)
+            }  
 
 ########################################
 ## INSTANTIATE XGBClassifier()
 ########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', parameters=parameters, num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
+xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num_boost_round=10, gpu_id=0, tree_method= 'gpu_hist')
 
-########################################
-## TRAIN MODEL
-########################################
-model = xgbc.fit(X_train, y_train)
+##############################################
+## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
+#############################################
+gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
+
+################################################################
+## TRAIN THE MODELS
+### - with the combinations of different parameters
+### - here is where GridSearch will be exeucuted
+#################################################################
+model = gridsearch.fit(X_train, y_train)
+
+##################################
+## OUTPUT(S)
+##################################
+# Print the best parameters
+print("The best parameters are: /n",  gridsearch.best_params_)
+
+# Store the model for prediction (chapter 5)
+model = gridsearch.best_estimator_
+
+# Delete X_train , y_train
+del [X_train, y_train]
 
 
+# In[117]:
 
-model.get_xgb_params()
+
+model.get_params()
+
 
 
 
