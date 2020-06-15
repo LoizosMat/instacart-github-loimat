@@ -1157,12 +1157,10 @@ from sklearn.model_selection import GridSearchCV
 ##########################################
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
+paramGrid = {'n_estimators':'100,150,200,250', 
+              'max_depth':'4,6,8,10'
+             }
 
-
-n_estimators = [100, 150, 200, 250]
-max_depth = [4, 6, 8, 10]
-print(max_depth)
-paramGrid = dict(max_depth=max_depth, n_estimators=n_estimators)
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
 
 ##############
