@@ -1157,7 +1157,7 @@ from sklearn.model_selection import GridSearchCV
 # Be cautious what parameters you enter in paramiGrid section.
 # More paremeters means that GridSearch will create and evaluate more models.
 ####################################    
-paramGrid = {'n_estimators'= range(50, 400, 50)
+paramGrid = {'n_estimators':[range(50, 400, 50)]
             }  
 
 ########################################
