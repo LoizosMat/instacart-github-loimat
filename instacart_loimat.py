@@ -1159,7 +1159,7 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
 paramGrid = {'n_estimators':[200], 
               'max_depth':[6],
-             'learning_rate' = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
+             'learning_rate':[0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
              }
 
 ##############
