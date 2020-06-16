@@ -1161,8 +1161,6 @@ paramGrid = {'n_estimators':'100,150,200,250',
               'max_depth':'4,6,8,10'
              }
 
-kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
-
 ##############
 ## INSTANTIATE XGBClassifier()
 ########################################
@@ -1171,7 +1169,7 @@ xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', num
 ##############################################
 ## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
 #############################################
-gridsearch = GridSearchCV(xgbc, paramGrid, cv=kfold, verbose=2, n_jobs=1)
+gridsearch = GridSearchCV(xgbc, paramGrid, cv=3, verbose=2, n_jobs=1)
 
 ################################################################
 ## TRAIN THE MODELS
@@ -1186,7 +1184,7 @@ model = gridsearch.fit(X_train, y_train)
 # Print the best parameters
 print("The best parameters are: /n",  gridsearch.best_params_)
 
-# Store the model for prediction (chapter 5)
+# Store the model for prediction (chapter 5).
 model = gridsearch.best_estimator_
 
 # Delete X_train , y_train
