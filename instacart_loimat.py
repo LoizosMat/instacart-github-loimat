@@ -1157,10 +1157,10 @@ from sklearn.model_selection import GridSearchCV
 ##########################################
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
-paramGrid = {'n_estimators':[900], 
+paramGrid = {'n_estimators':[900,1000], 
               'max_depth':[5],
              'learning_rate':[0.04],
-             'min_child_weight':[1],
+             'min_child_weight':[1,2],
              'colsample_bytree':[1],
              'subsample':[1],
              }
