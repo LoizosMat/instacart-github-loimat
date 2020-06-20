@@ -1166,7 +1166,7 @@ paramGrid = {'n_estimators':[900,1000],
              }
 
 ##############
-## INSTANTIATE XGBClassifier()
+## INSTANTIATE XGBClassifier()###
 ########################################
 xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist')
 
