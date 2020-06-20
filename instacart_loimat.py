@@ -1159,8 +1159,8 @@ X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
 
 paramGrid = {
-             'colsample_bylevel':[0.6,0.7,0.8,0.9,1],
-             'subsample':[0.7,0.8],
+             'colsample_bytree':[0.6,0.7,0.8],
+             'subsample':[0.7,0.8,0.9],
              }
 
 ##############
