@@ -1266,14 +1266,14 @@ from sklearn.model_selection import GridSearchCV
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
 
-paramGrid = {'n_estimators':[500,800], 
-             'learning_rate':[0.04,0.07,0.1]
+paramGrid = {'n_estimators':[800,1000,1200]
+             'max_depth':[5,8]
              }
 
 ##############
 ## INSTANTIATE XGBClassifier()###
 ########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist', max_depth=5, min_child_weight=1, colsample_bytree=0.8, subsample=0.8)
+xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist', max_depth=5, min_child_weight=1, colsample_bytree=0.8, subsample=0.8, learning_rate=0.07)
 
 ##############################################
 ## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
