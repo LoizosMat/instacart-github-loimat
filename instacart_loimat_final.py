@@ -1273,7 +1273,7 @@ paramGrid = {'n_estimators':[800,1000,1200]
 ##############
 ## INSTANTIATE XGBClassifier()###
 ########################################
-xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist', max_depth=5, min_child_weight=1, colsample_bytree=0.8, subsample=0.8, learning_rate=0.07)
+xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist', min_child_weight=1, colsample_bytree=0.8, subsample=0.8, learning_rate=0.07)
 
 ##############################################
 ## DEFINE HOW TO TRAIN THE DIFFERENT MODELS
