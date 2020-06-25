@@ -1270,7 +1270,7 @@ paramGrid = {'subsample':[0.7,0.8,0.9,1]
              }
 
 ##############
-## INSTANTIATE XGBClassifier()###
+## INSTANTIATE XGBClassifier()####
 ########################################
 xgbc = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', gpu_id=0, tree_method= 'gpu_hist', learning_rate=0.07, n_estimators=1000, max_depth=3, min_child_weight=1, colsample_bytree=0.9)
 
