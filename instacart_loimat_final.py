@@ -1266,8 +1266,8 @@ from sklearn.model_selection import GridSearchCV
 X_train, y_train = data_train.drop('reordered', axis=1), data_train.reordered
 
 
-paramGrid = {'n_estimators':[900,1000,1100],
-             'learning_rate':[0.06,0.07]
+paramGrid = {'n_estimators':[1100,1300],
+             'learning_rate':[0.05,0.06]
              }
 
 ##############
