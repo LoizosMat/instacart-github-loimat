@@ -6,7 +6,6 @@
 
 # For data manipulation
 import pandas as pd            
-import time
 import numpy as np
 # Garbage Collector to free up memory
 import gc                         
@@ -50,11 +49,6 @@ op.head()
 opad = op.merge(products, on='product_id', how='left')
 opad.head()
 
-
-# In[7]:
-
-
-orders_prior=orders[orders.eval_set=='prior']
 
 
 # In[8]:
